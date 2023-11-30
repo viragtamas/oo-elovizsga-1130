@@ -29,6 +29,9 @@ class Foglalas:
         self.szoba = szoba
         self.datum = datum
 
+    def __str__(self):
+        return f"A foglalt szoba száma {self.szoba} a {self.datum} napra."
+
 
 #Hozz létre egy Szalloda osztályt, ami ezekből a Szobákból áll, és van saját attributuma is (név pl.)
 
@@ -43,6 +46,13 @@ class Szalloda:
 
     def uj_foglalas(self, foglalas: Foglalas):
         self.foglalasok.append(Foglalas)
+
+    def foglalas_listazas(self):
+        print("A következő foglalások vannak a rendszerben:")
+        for foglalas in self.foglalasok:
+            print(foglalas)
+
+
 
     def feltolt(self):
         self.uj_szoba(EgyagyasSzoba(101, 35000))
@@ -73,11 +83,19 @@ def foglalaskezeles(szallodam: Szalloda):
         print("4. Kilépés")
         muvelet = input("Adja meg a kívánt művelet sorszámát: ")
         if muvelet == "1":
-            pass
+            print("Hány főre kíván szobát foglalni?")
+            szemelyek = input("1 vagy 2?")
+            if szemelyek == "1":
+                szalloda.uj_foglalas(Foglalas(101, 20240107))
+                print("Szoba sikeresen lefoglalva 20240107 dátumra")
+            elif szemelyek == "2":
+                print("Jelenleg nem lehet kétágyas szobát foglalni.")
+            else:
+                print ("Személyek száma nem megfelelő")
         elif muvelet == "2":
             pass
         elif muvelet == "3":
-            pass
+            szalloda.foglalas_listazas()
         elif muvelet == "4":
             break
         else:

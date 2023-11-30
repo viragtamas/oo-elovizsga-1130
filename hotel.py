@@ -43,6 +43,7 @@ class Szalloda:
 
     def uj_foglalas(self, foglalas: Foglalas):
         self.foglalasok.append(Foglalas)
+
     def feltolt(self):
         self.uj_szoba(EgyagyasSzoba(101, 35000))
         self.uj_szoba(EgyagyasSzoba(102, 35000))
@@ -63,6 +64,25 @@ class Szalloda:
 def foglalaskezeles(szallodam: Szalloda):
 #Töltsd fel az futtatás után a rendszert 1 szállodával, 3 szobával és 5 foglalással, mielőtt a felhasználói adatbekérés megjelenik.
     szallodam.feltolt()
+
+    while True:
+        print("Adja meg, hogy mit szeretne tenni:")
+        print("1. Foglalás")
+        print("2. Lemondás")
+        print("3. Listázás")
+        print("4. Kilépés")
+        muvelet = input("Adja meg a kívánt művelet sorszámát: ")
+        if muvelet == "1":
+            pass
+        elif muvelet == "2":
+            pass
+        elif muvelet == "3":
+            pass
+        elif muvelet == "4":
+            break
+        else:
+            print("Nem megfelelő menüpont")
+
 
 szalloda = Szalloda()
 foglalaskezeles(szalloda)

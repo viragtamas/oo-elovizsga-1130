@@ -44,14 +44,23 @@ class Szalloda:
     def uj_szoba(self, szoba: Szoba):
         self.szobak.append(szoba)
 
-    def uj_foglalas(self, foglalas: Foglalas):
-        self.foglalasok.append(Foglalas)
+    def uj_foglalas(self, foglal: Foglalas):
+        self.foglalasok.append(foglal)
 
     def foglalas_listazas(self):
         print("A következő foglalások vannak a rendszerben:")
         for foglalas in self.foglalasok:
             print(foglalas)
 
+    def szabadszobak(self, szemelyek, datum):
+        for szoba in self.szobak:
+            for van in self.foglalasok:
+                if szoba.szobaszam != van.szoba and datum != van.datum:
+                    self.uj_foglalas(Foglalas(szoba.szobaszam, datum))
+                    print (f"lefoglalva a {szoba.szobaszam} számú szoba {datum} napra")
+                    return
+                else:
+                    print (f"A {szoba.szobaszam} számú szoba nem szabad")
 
 
     def feltolt(self):
@@ -83,15 +92,9 @@ def foglalaskezeles(szallodam: Szalloda):
         print("4. Kilépés")
         muvelet = input("Adja meg a kívánt művelet sorszámát: ")
         if muvelet == "1":
-            print("Hány főre kíván szobát foglalni?")
-            szemelyek = input("1 vagy 2?")
-            if szemelyek == "1":
-                szalloda.uj_foglalas(Foglalas(101, 20240107))
-                print("Szoba sikeresen lefoglalva 20240107 dátumra")
-            elif szemelyek == "2":
-                print("Jelenleg nem lehet kétágyas szobát foglalni.")
-            else:
-                print ("Személyek száma nem megfelelő")
+            szemelyek = input("Hány főre kíván szobát foglalni? 1 vagy 2?")
+            kezdonap =input("Mikor érkezik: ÉÉÉÉHHNN formában adja meg?")
+            szalloda.szabadszobak(szemelyek, kezdonap)
         elif muvelet == "2":
             pass
         elif muvelet == "3":
